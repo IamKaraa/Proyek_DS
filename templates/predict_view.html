@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% block title %}Predict Attrition{% endblock %}
+{% block content %}
+<h1 class="page-title">Analisis Risiko Karyawan</h1>
+
+<form id="predictForm" class="predict-form">
+    <div class="form-grid">
+        <div class="form-group">
+            <label>Pendapatan Bulanan ($):</label>
+            <input type="number" name="MonthlyIncome" value="{{ features['MonthlyIncome'] }}" required>
+        </div>
+        <div class="form-group">
+            <label>Usia:</label>
+            <input type="number" name="Age" value="{{ features['Age'] }}" required>
+        </div>
+        <div class="form-group">
+            <label>Total Masa Kerja (Tahun):</label>
+            <input type="number" name="TotalWorkingYears" value="{{ features['TotalWorkingYears'] }}" required>
+        </div>
+        <div class="form-group">
+            <label>Lembur:</label>
+            <select name="OverTime" required>
+                <option value="0" {% if features['OverTime'] == 0 %}selected{% endif %}>Tidak</option>
+                <option value="1" {% if features['OverTime'] == 1 %}selected{% endif %}>Ya</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Tarif Bulanan:</label>
+            <input type="number" name="MonthlyRate" value="{{ features['MonthlyRate'] }}" required>
+        </div>
+        <div class="form-group">
+            <label>Tarif Harian:</label>
+            <input type="number" name="DailyRate" value="{{ features['DailyRate'] }}" required>
+        </div>
+        <div class="form-group">
+            <label>Jarak dari Rumah (km):</label>
+            <input type="number" name="DistanceFromHome" value="{{ features['DistanceFromHome'] }}" required>
+        </div>
+        <div class="form-group">
+            <label>Tarif per Jam:</label>
+            <input type="number" name="HourlyRate" value="{{ features['HourlyRate'] }}" required>
+        </div>
+        <div class="form-group">
+            <label>Jumlah Perusahaan Sebelumnya:</label>
+            <input type="number" name="NumCompaniesWorked" value="{{ features['NumCompaniesWorked'] }}" required>
+        </div>
+    </div>
+    <button type="submit" class="predict-btn" id="submitBtn">Submit Data & Prediksi</button>
+</form>
+
+<div id="resultModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <div id="loading" style="display:none;">
+            <div class="loader"></div>
+            <p>Menganalisis profil karyawan...</p>
+        </div>
+        <div id="modalBody" style="display:none;">
+            <div id="statusIcon" style="font-size: 4rem; margin-bottom: 1rem;"></div>
+            <h2 id="resultText" style="margin-bottom: 0.5rem;"></h2>
+            <p id="resultDesc" style="color: #4a5568; margin-bottom: 1.5rem;"></p>
+            <button class="predict-btn" onclick="closeModal()">Tutup</button>
+        </div>
+    </div>
+</div>
+
+<script>
+const form = document.getElementById('predictForm');
+const modal = document.getElementById('resultModal');
+const modalBody = document.getElementById('modalBody');
+const loading = document.getElementById('loading');
+const statusIcon = document.getElementById('statusIcon');
+
+form.onsubmit = async (e) => {
+    e.preventDefault();
+    modal.style.display = "flex";
+    modalBody.style.display = "none";
+    loading.style.display = "block";
+
+    const formData = new FormData(form);
+    try {
+        const response = await fetch('/predict', {
+            method: 'POST',
+            body: formData
+        });
+        const result = await response.json();
+        
+        // Simulasi delay sedikit agar terasa sedang "berpikir"
+        setTimeout(() => {
+            loading.style.display = "none";
+            modalBody.style.display = "block";
+            
+            const resultText = document.getElementById('resultText');
+            const resultDesc = document.getElementById('resultDesc');
+            
+            if(result.prediction === "Yes") {
+                statusIcon.innerHTML = "⚠️";
+                resultText.innerHTML = "Potensi Resign: TINGGI";
+                resultText.style.color = "#e53e3e";
+                resultDesc.innerText = "Berdasarkan analisis model, karyawan ini memiliki risiko tinggi untuk meninggalkan perusahaan dalam waktu dekat.";
+            } else {
+                statusIcon.innerHTML = "✅";
+                resultText.innerHTML = "Potensi Resign: RENDAH";
+                resultText.style.color = "#38a169";
+                resultDesc.innerText = "Karyawan ini diprediksi akan tetap bertahan. Profil menunjukkan stabilitas yang baik dalam perusahaan.";
+            }
+        }, 800);
+    } catch (error) {
+        alert("Terjadi kesalahan pada server.");
+        closeModal();
+    }
+}
+
+function closeModal() { modal.style.display = "none"; }
+window.onclick = (e) => { if (e.target == modal) closeModal(); }
+document.querySelector('.close-btn').onclick = closeModal;
+</script>
+{% endblock %}

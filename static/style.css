@@ -1,0 +1,333 @@
+/* GLOBAL STYLES */
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f4f6f8;
+    margin: 0;
+    color: #2d3748;
+}
+
+/* NAVIGATION */
+nav {
+    background: #2d3748;
+    padding: 1rem 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap; /* Agar rapi jika layar kecil */
+}
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+    font-size: 1.1rem;
+}
+nav a:hover, nav a.active {
+    background: #4a5568;
+}
+
+/* MAIN CONTAINER */
+main {
+    max-width: 1000px;
+    width: 90%;
+    margin: 2rem auto;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    padding: 2.5rem;
+    box-sizing: border-box;
+}
+.page-title {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+    color: #1a202c;
+}
+
+/* HOME PAGE */
+.home-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+.home-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+.home-desc {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #4a5568;
+}
+.home-desc a {
+    color: #3182ce;
+    text-decoration: none;
+    font-weight: 600;
+}
+.home-desc a:hover {
+    text-decoration: underline;
+}
+.menu-highlight {
+    background: #edf2f7;
+    color: #2b6cb0;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.95em;
+}
+
+/* API CODE BLOCK (DARK THEME) */
+.api-code-block {
+    background: #1e1e1e;
+    border-radius: 8px;
+    padding: 1.2rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+.api-code-block code {
+    font-family: 'Consolas', 'Courier New', monospace;
+    color: #d4d4d4;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* PREDICT FORM */
+.result-title {
+    background: #ebf8fa;
+    color: #2b6cb0;
+    text-align: center;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    border: 1px solid #bee3f8;
+}
+.result-title span {
+    font-weight: bold;
+    color: #e53e3e; /* Warna merah untuk hasil Yes/No agar mencolok */
+}
+.predict-form {
+    max-width: 550px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+.form-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+.form-row label {
+    flex: 1;
+    font-weight: 600;
+    color: #4a5568;
+}
+.form-row input,
+.form-row select {
+    flex: 1.5;
+    padding: 0.7rem;
+    border: 1px solid #cbd5e0;
+    border-radius: 6px;
+    font-size: 1rem;
+    background: #f7fafc;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+}
+.form-row input:focus,
+.form-row select:focus {
+    outline: none;
+    border-color: #3182ce;
+    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.2);
+}
+.predict-btn {
+    background: #2d3748;
+    color: #fff;
+    border: none;
+    padding: 1rem;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: background-color 0.2s, transform 0.1s;
+    width: 100%;
+}
+.predict-btn:hover {
+    background: #4a5568;
+}
+.predict-btn:active {
+    transform: scale(0.98);
+}
+
+/* DASHBOARD LOOKER STUDIO */
+.dashboard-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.iframe-wrapper {
+    width: 100%;
+    aspect-ratio: 16 / 9; /* Rasio standar agar responsif */
+    background: #f4f6f8;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+}
+.iframe-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* === RESPONSIVE DESIGN UNTUK HP === */
+@media screen and (max-width: 600px) {
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    nav a {
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+    main {
+        width: 95%;
+        padding: 1.5rem;
+        margin: 1rem auto;
+    }
+    .form-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.4rem;
+    }
+    .form-row input,
+    .form-row select {
+        width: 100%; /* Memaksa input full width di HP */
+    }
+    .home-title {
+        font-size: 2rem;
+    }
+}
+
+/* MODERN HERO SECTION */
+.hero-section { text-align: center; padding: 2rem 1rem; }
+.hero-title { font-size: 3rem; color: #1a202c; margin-bottom: 1rem; }
+.hero-subtitle { font-size: 1.3rem; color: #718096; max-width: 700px; margin: 0 auto 3rem; }
+
+.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 2rem; }
+.feature-card { background: #fff; padding: 2rem; border-radius: 12px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); transition: transform 0.3s; text-align: center; }
+.feature-card:hover { transform: translateY(-10px); }
+.feature-card .icon { font-size: 3rem; margin-bottom: 1rem; }
+
+/* GRID FORM */
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+
+/* MODAL STYLES */
+.modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); backdrop-filter: blur(4px); }
+.modal-content { background-color: #fff; margin: 10% auto; padding: 3rem; border-radius: 15px; width: 90%; max-width: 500px; text-align: center; position: relative; animation: slideDown 0.4s; }
+@keyframes slideDown { from {top: -300px; opacity: 0} to {top: 0; opacity: 1} }
+.close-btn { position: absolute; top: 15px; right: 20px; font-size: 28px; cursor: pointer; color: #718096; }
+
+/* RESPONSIVE */
+@media screen and (max-width: 600px) {
+    .form-grid { grid-template-columns: 1fr; }
+    .hero-title { font-size: 2rem; }
+}
+
+/* GRID FORM */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 kolom di layar besar */
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #4a5568;
+    font-size: 0.95rem;
+}
+
+.form-group input, .form-group select {
+    padding: 0.75rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background: #f8fafc;
+    font-size: 1rem;
+    transition: all 0.2s;
+}
+
+.form-group input:focus {
+    border-color: #3182ce;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
+    outline: none;
+}
+
+/* MODAL STYLES */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(26, 32, 44, 0.6);
+    backdrop-filter: blur(5px);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: #fff;
+    padding: 3rem 2rem;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 450px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    animation: zoomIn 0.3s ease-out;
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.loader {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3182ce;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem;
+}
+
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+/* RESPONSIVE */
+@media screen and (max-width: 768px) {
+    .form-grid { grid-template-columns: 1fr; } /* 1 kolom di HP */
+    main { width: 95%; padding: 1.5rem; }
+}

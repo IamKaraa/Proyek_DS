@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Home - Attrition App{% endblock %}
+{% block content %}
+<div class="hero-section">
+    <h1 class="hero-title">Solusi Analitik SDM Pintar</h1>
+    <p class="hero-subtitle">Mendeteksi risiko retensi karyawan secara dini menggunakan kekuatan Data Science dan Machine Learning.</p>
+    
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="icon">📊</div>
+            <h3>Dashboard Analitik</h3>
+            <p>Visualisasi data historis attrition untuk menemukan tren dan pola tersembunyi.</p>
+            <a href="/dashboard" class="btn-secondary">Lihat Dashboard</a>
+        </div>
+        <div class="feature-card">
+            <div class="icon">🤖</div>
+            <h3>Prediksi Cerdas</h3>
+            <p>Gunakan model Random Forest untuk memprediksi potensi resign karyawan baru secara individu.</p>
+            <a href="/predict" class="btn-primary">Mulai Prediksi</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
